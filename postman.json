@@ -1,0 +1,119 @@
+{
+    "info": {
+        "_postman_id": "2",
+        "name": "EKommerce API",
+        "description": "Collection for Ecommerce API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Products",
+            "item": [
+                {
+                    "name": "Get All Products",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:8000/api/products/"
+                    }
+                },
+                {
+                    "name": "Get Product by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:8000/api/products/{id}/"
+                    }
+                },
+                {
+                    "name": "Create Product",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:8000/api/products/"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Create User",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:8000/api/users/"
+                    }
+                },
+                {
+                    "name": "Get User by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:8000/api/users/{id}/"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Cart",
+            "item": [
+                {
+                    "name": "Get Cart",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:8000/api/cart/"
+                    }
+                },
+                {
+                    "name": "Add to Cart",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:8000/api/cart/add/"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Orders",
+            "item": [
+                {
+                    "name": "Get All Orders",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:8000/api/orders/"
+                    }
+                },
+                {
+                    "name": "Get Order by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://127.0.0.1:8000/api/orders/{id}/"
+                    }
+                },
+                {
+                    "name": "Place Order",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:8000/api/orders/"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Get Token",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:8000/api/token/"
+                    }
+                },
+                {
+                    "name": "Refresh Token",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://127.0.0.1:8000/api/token/refresh/"
+                    }
+                }
+            ]
+        }
+    ]
+}
