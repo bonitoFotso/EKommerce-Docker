@@ -15,8 +15,7 @@ RUN apt-get update && apt-get install -y netcat
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
-RUN ./manage.py makemigrations
-RUN ./manage.py migrate
+RUN ls --all
 
 
 # copy entrypoint.sh

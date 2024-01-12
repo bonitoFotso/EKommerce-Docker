@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    container_name: Web-Django
     build: ./app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -12,14 +13,27 @@ services:
       - ./.env.dev
     depends_on:
       - db
+    networks:
+      - ecomm-network
   db:
-    image: postgres:15
+    image: postgres:15.2-alpine
+    container_name: Bd-psg
+    ports:
+      - "5432:5432"
+    env_file: ./.env.dev
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ecomm-network
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=passwd
+      - POSTGRES_DB=db
+
+networks:
+  ecomm-network:
+    driver: bridge
+
 
 volumes:
   postgres_data:

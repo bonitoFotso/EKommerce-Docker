@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from shop.models import Client, Category, Produit, Commande, CommandeArticle, AddressChipping
+from shop.models import (Client, Category, Produit, 
+                        Commande, CommandeArticle, 
+                        AddressChipping, ProductAttribute, SubCategory, Key)
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,12 +15,41 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'name', 'description']
 
+class SubCategorySerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+    class Meta:
+        model = SubCategory
+        fields = ['id', 'name', 'category']
+
+class KeySerializer(serializers.ModelSerializer):
+    subcategory = SubCategorySerializer()
+    class Meta:
+        model = Key
+        fields = ['id', 'subcategory', 'key']
+
+class ProductAttributeSerializer(serializers.ModelSerializer):
+    key = KeySerializer()
+    class Meta:
+        model = ProductAttribute
+        fields = ['key', 'value']
+
+    def to_representation(self, instance):
+        # Personnalise la représentation pour obtenir un dictionnaire clé-valeur
+        return {
+            instance.key.key: instance.value
+        }
+
 
 class ProduitSerializer(serializers.ModelSerializer):
+    subcategory = SubCategorySerializer()
+    
+    # Utilisation du ProductAttributeSerializer pour sérialiser les attributs personnalisés
+    fields = ProductAttributeSerializer(many=True, read_only=True)
+
     class Meta:
         model = Produit
-        fields = ['id', 'categorie', 'name', 'price', 'digital', 'image', 'date_ajout', 'imageUrl']
-
+        fields = ['id', 'subcategory', 'name', 'price', 'digital', 'image', 'date_ajout', 'stock', 'fields']
+        read_only_fields = ['date_ajout', 'id']
 
 class CommandeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,5 +68,4 @@ class AddressChippingSerializer(serializers.ModelSerializer):
         model = AddressChipping
         fields = ['id', 'client', 'commande', 'addresse', 'ville', 'zipcode', 'date_ajout']
 
-# serializers.py
 

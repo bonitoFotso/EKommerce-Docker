@@ -33,6 +33,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'shop',
+    # 'accounts',
+    'corsheaders',
+
 
 ]
 CORS_ALLOW_ALL_ORIGINS = True
@@ -40,8 +43,15 @@ CORS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+        #'rest_framework.authentication.TokenAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
+    ),
+    'TOKEN_EXPIRED_AFTER_SECONDS': 300,
+
 }
+
+# AUTH_USER_MODEL = 'accounts.User'
+# AUTH_EMAIL_VERIFICATION = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
@@ -174,6 +184,41 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "mediafiles"
 
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'Your Email'
+EMAIL_HOST_PASSWORD = 'Your Password'
+
+# Allow credentials such as cookies to be included in the request
+CORS_ALLOW_CREDENTIALS = True
+
+
+# Allow specific headers in the CORS request
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# Allow specific methods in the CORS request
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
