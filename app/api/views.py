@@ -4,9 +4,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime
 
-from shop.models import Client, Category, Produit, Commande, CommandeArticle, AddressChipping
+from produits.models import Produit
 from .serializers import ProduitSerializer  # Assurez-vous d'importer votre sérialiseur approprié
-from shop.utils import data_cookie 
+from produits.utils import data_cookie 
+from clients.models import Client
+from commandes.models import  Commande, CommandeArticle, AddressChipping
 
 
 class CurrenTimeView(APIView):

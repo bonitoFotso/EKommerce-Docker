@@ -10,9 +10,7 @@ from upload.views import image_upload
 urlpatterns = [
     path("", image_upload, name="upload"),
     path("admin/", admin.site.urls),
-
     path('api/',include('api.urls')),
-    path('',include('shop.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

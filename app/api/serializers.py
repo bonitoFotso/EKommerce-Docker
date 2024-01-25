@@ -1,8 +1,11 @@
 from rest_framework import serializers
+from clients.models import Client
+from produits.models import ( Category, Produit, 
+                        
+                         ProductAttribute, SubCategory, Key)
 
-from shop.models import (Client, Category, Produit, 
-                        Commande, CommandeArticle, 
-                        AddressChipping, ProductAttribute, SubCategory, Key)
+from commandes.models import  Commande, CommandeArticle, AddressChipping
+
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
